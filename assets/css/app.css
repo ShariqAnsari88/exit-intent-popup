@@ -722,6 +722,8 @@ template {
               .exit-intent-popup .e-i-pop-content .e-i-form-box .e-i-form .e-i-form-field .e-i-form-text-field {
                 height: 7rem;
                 font-size: 1.8rem; } }
+            .exit-intent-popup .e-i-pop-content .e-i-form-box .e-i-form .e-i-form-field .e-i-form-text-field.error {
+              border-color: red; }
           .exit-intent-popup .e-i-pop-content .e-i-form-box .e-i-form .e-i-form-field .e-i-form-checkbox {
             width: 1.6rem;
             height: 1.6rem;
@@ -730,6 +732,8 @@ template {
               .exit-intent-popup .e-i-pop-content .e-i-form-box .e-i-form .e-i-form-field .e-i-form-checkbox {
                 width: 2.2rem;
                 height: 2.2rem; } }
+            .exit-intent-popup .e-i-pop-content .e-i-form-box .e-i-form .e-i-form-field .e-i-form-checkbox.error {
+              outline: 0.1rem solid red; }
         .exit-intent-popup .e-i-pop-content .e-i-form-box .e-i-form .e-i-form-footer {
           width: 100%;
           margin-top: 2rem; }
