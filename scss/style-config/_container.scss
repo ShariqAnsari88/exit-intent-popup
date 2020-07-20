@@ -1,0 +1,17 @@
+.section {
+    width: 100%;
+    display: inline-block;
+    .container {
+        margin: 0 auto;
+        max-width: calc(100% - #{$container-gutter-space-small});
+        @include media($medium) {
+            max-width: calc(100% - #{$container-gutter-space});
+        }
+        @include media($xxlarge) {
+            max-width: $container-max-width;
+        }
+        .layout {
+            width: 100%;
+        }
+    }
+}

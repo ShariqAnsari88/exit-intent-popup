@@ -1,0 +1,25 @@
+.flex {
+  display: flex;
+  flex-flow: column;
+  @include media($medium) {
+    flex-flow: row;
+  }
+}
+.justify-content-center {
+  justify-content: center;
+}
+.justify-content-space-between {
+  justify-content: space-between;
+}
+.align-items-center {
+  align-items: center;
+}
+.flex-flow-column {
+  flex-flow: column;
+}
+.flex-flow-row {
+  flex-flow: row;
+}
+.align-items-top {
+  align-items: top;
+}

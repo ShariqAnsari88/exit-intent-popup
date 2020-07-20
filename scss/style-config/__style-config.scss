@@ -1,0 +1,52 @@
+/* Main Configuration Don't Touch
+	 ========================================================================== */
+// WebFonts
+@import "fonts.scss";
+$regular: "open-sans-regular", sans-serif;
+$bold: "Saira Semi Condensed", sans-serif;
+
+// GEMVARA theme color
+$primary-color: #ffd101;
+$secondary-color: green;
+$link-color: #8dcae8;
+
+// WebColors
+$white: #f4f7f6;
+$black: #2c2c31;
+$z-black: #000000;
+$gray: #36343e;
+$light-gray: #5d5a67;
+$red: #f93958;
+
+// Media Query Screen Size's
+$medium: 50em; //800px
+$default: 64em; //1024px
+$large: 75em; //1200px
+$xlarge: 85.5em; //1368px
+$xxlarge: 90.1em; //1441px
+
+// Global Spaces
+$gutter-space: 2rem;
+$container-gutter-space: 8rem;
+$container-gutter-space-small: 3rem;
+
+// Border Radius
+$border-radius: 0;
+
+// Container Width
+$container-max-width: 144rem;
+
+// Mobile Menu
+$height-icon: 1.8rem;
+$width-line: 3.2rem;
+$height-line: 0.4rem;
+$transition-time: 0.3s;
+$rotation: 45deg;
+$translateY: ($height-icon / 2);
+$translateX: 0;
+
+@import "media-query", "typography", "helpers", "normalize", "buttons",
+  "container", "flex", "spacing";
+
+/* Main Configuration Don't Touch
+	 ========================================================================== */

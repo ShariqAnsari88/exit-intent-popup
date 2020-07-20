@@ -1,0 +1,17 @@
+@mixin gutter-space {
+  padding-left: $gutter-space;
+  padding-right: $gutter-space;
+}
+@mixin link {
+  @include small-font-style;
+  font-weight: 400;
+  font-family: $bold;
+  text-decoration: underline;
+  color: lighten($z-black, 50);
+  color: $gray;
+}
+@mixin box-shadow {
+  -webkit-box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 0.1);
+}
