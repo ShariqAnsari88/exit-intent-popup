@@ -282,7 +282,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: gray;
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 999;
   display: none;
 }
@@ -393,6 +393,7 @@
   border: 1px solid #d2d2d7;
   border-radius: 3px;
   font-size: 14px;
+  box-sizing: border-box;
   font-family: "open-sans-regular", sans-serif;
 }
 @media screen and (min-width: 50em) {

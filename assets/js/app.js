@@ -110,10 +110,12 @@ $(document).ready(function () {
         }
 
         //checkbox value check
-        if ($("input[type='checkbox']").is(":not(:checked)")) {
-          $("input[type='checkbox']").addClass("error");
+        if (
+          $(".exit-intent-popup input[type='checkbox']").is(":not(:checked)")
+        ) {
+          $(".exit-intent-popup input[type='checkbox']").addClass("error");
         } else {
-          $("input[type='checkbox']").removeClass("error");
+          $(".exit-intent-popup input[type='checkbox']").removeClass("error");
         }
 
         //email regex
@@ -143,7 +145,7 @@ $(document).ready(function () {
     },
 
     init: function () {
-      // iePop.template();
+      iePop.template();
       if (iePop.isMobile) {
         iePop.handleMobilePopupShow();
       } else {
