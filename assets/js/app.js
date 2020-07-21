@@ -1,11 +1,24 @@
 $(document).ready(function () {
   const iePop = {
     body: $("body"),
-    popup: $(".exit-intent-popup"),
-    form: $("#eiForm"),
+    popup: "",
+    form: "",
     isPopShow: false,
     cookies: "",
     isMobile: window.innerWidth <= 768,
+
+    template: function () {
+      $(document.head).append(
+        '<link rel="stylesheet" href="https://shariqansari88.github.io/exit-intent-popup/assets/css/app.css" />'
+      );
+
+      let template = `<section class="exit-intent-popup flex justify-content-center align-items-center" > <div class="e-i-pop-content flex"> <div class="e-i-close-cta flex justify-content-center align-items-center" ></div><div class="e-i-form-box"> <div class="e-i-title"> <h3> Get %10 off when you sign up for <span>savings, news, updates and more</span> </h3> </div><div class="e-i-form mt-3"> <form id="eiForm"> <div class="e-i-form-field"> <input type="text" class="e-i-form-text-field px-2" placeholder="Your name" id="eIName" name="eIName"/> </div><div class="e-i-form-field"> <input type="text" class="e-i-form-text-field ie-form-element px-2" placeholder="Email address" id="eIEmail" name="eIEmail"/> </div><div class="e-i-form-field flex flex-flow-row align-items-center"> <input type="checkbox" class="e-i-form-checkbox" id="eICheckBox" name="eICheckBox"/> <label>Check this box to recieve monthly newsletter.</label> </div><div class="e-i-form-footer flex flex-flow-column align-items-center" > <input id="eISubmit" type="submit" value="Sign Up" class="button"/> <a href="#" class="eiLink">Privacy Policy</a> </div></form> </div></div><div class="e-i-banner-img p-3 align-items-center"> <img src="https://shariqansari88.github.io/exit-intent-popup/assets/img/christmas-sale-banner.jpg" alt="Christmas Sale 50% Off"/> </div></div></section>`;
+
+      iePop.body.append(template);
+
+      iePop.popup = $(".exit-intent-popup");
+      iePop.form = $("#eiForm");
+    },
 
     handleMouseMove: function () {
       $(document).on("mousemove", function (e) {
@@ -36,13 +49,14 @@ $(document).ready(function () {
     handlePopupShow: function () {
       if (iePop.isPopShow === true) {
         iePop.popup.addClass("show");
+        console.log(iePop.popup.length);
       }
     },
 
     handleMobilePopupShow: function () {
       setTimeout(function () {
         let isCookies = JSON.parse(iePop.cookies.iePop);
-        console.log("Mobile cookie is", isCookies);
+        console.log("Mobile cookie =", isCookies);
 
         if (iePop.isMobile && isCookies !== true) {
           iePop.popup.addClass("show");
@@ -52,6 +66,7 @@ $(document).ready(function () {
 
     handlePopupClose: function () {
       $(".e-i-close-cta").on("click", function () {
+        console.log("clicked");
         iePop.popup.removeClass("show");
         iePop.setCookie("iePop", true, 1);
       });
@@ -80,7 +95,7 @@ $(document).ready(function () {
         iePop.cookies.iePop = false;
       }
 
-      console.log("Cookie is", JSON.parse(iePop.cookies.iePop));
+      console.log("Cookie =", iePop.cookies.iePop);
     },
 
     handleFormValidation: function () {
@@ -128,6 +143,7 @@ $(document).ready(function () {
     },
 
     init: function () {
+      iePop.template();
       if (iePop.isMobile) {
         iePop.handleMobilePopupShow();
       } else {
