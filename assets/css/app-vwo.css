@@ -279,15 +279,20 @@
 .exit-intent-popup {
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.8);
   z-index: 999;
   display: none;
 }
-.exit-intent-popup.show {
-  display: flex;
+.e-i-opac-layer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
 }
 .exit-intent-popup .e-i-close-cta {
   width: 16px;
@@ -334,6 +339,7 @@
 }
 .exit-intent-popup .e-i-pop-content {
   position: relative;
+  z-index: 9;
   width: calc(100% - 30px);
   background-color: #ffd101;
 }
@@ -504,5 +510,59 @@
   .exit-intent-popup .e-i-pop-content .e-i-banner-img {
     width: 40%;
     display: flex;
+  }
+}
+
+.exit-intent-popup.show {
+  display: flex;
+}
+.exit-intent-popup.show .e-i-opac-layer {
+  animation: iePopFadeInOpacLayer 0.3s forwards;
+}
+.exit-intent-popup.show .e-i-pop-content {
+  animation: iePopTranslateY 0.5s forwards;
+}
+.exit-intent-popup.show .iePopTranslateYReverse {
+  animation: iePopTranslateYReverse 0.5s forwards;
+}
+.exit-intent-popup.show .iePopFadeOutOpacLayer {
+  animation: iePopFadeOutOpacLayer 0.3s forwards;
+}
+
+@keyframes iePopTranslateY {
+  0% {
+    transform: translateY(-250px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes iePopTranslateYReverse {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-250px);
+    opacity: 0;
+  }
+}
+
+@keyframes iePopFadeInOpacLayer {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes iePopFadeOutOpacLayer {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

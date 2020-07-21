@@ -8,13 +8,13 @@ $(document).ready(function () {
     isMobile: window.innerWidth <= 768,
 
     template: function () {
-      $(document.head).append(
-        '<link rel="stylesheet" href="https://shariqansari88.github.io/exit-intent-popup/assets/css/app-vwo.css" />'
-      );
+      // $(document.head).append(
+      //   '<link rel="stylesheet" href="https://shariqansari88.github.io/exit-intent-popup/assets/css/app-vwo.css" />'
+      // );
 
-      let template = `<section class="exit-intent-popup flex justify-content-center align-items-center" > <div class="e-i-pop-content flex"> <div class="e-i-close-cta flex justify-content-center align-items-center" ></div><div class="e-i-form-box"> <div class="e-i-title"> <h3> Get %10 off when you sign up for <span>savings, news, updates and more</span> </h3> </div><div class="e-i-form mt-3"> <form id="eiForm"> <div class="e-i-form-field"> <input type="text" class="e-i-form-text-field px-2" placeholder="Your name" id="eIName" name="eIName"/> </div><div class="e-i-form-field"> <input type="text" class="e-i-form-text-field ie-form-element px-2" placeholder="Email address" id="eIEmail" name="eIEmail"/> </div><div class="e-i-form-field flex flex-flow-row align-items-center"> <input type="checkbox" class="e-i-form-checkbox" id="eICheckBox" name="eICheckBox"/> <label>Check this box to recieve monthly newsletter.</label> </div><div class="e-i-form-footer flex flex-flow-column align-items-center" > <input id="eISubmit" type="submit" value="Sign Up" class="button"/> <a href="#" class="eiLink">Privacy Policy</a> </div></form> </div></div><div class="e-i-banner-img p-3 align-items-center"> <img src="https://shariqansari88.github.io/exit-intent-popup/assets/img/christmas-sale-banner.jpg" alt="Christmas Sale 50% Off"/> </div></div></section>`;
+      // let template = `<section class="exit-intent-popup flex justify-content-center align-items-center" > <div class="e-i-pop-content flex"> <div class="e-i-close-cta flex justify-content-center align-items-center" ></div><div class="e-i-form-box"> <div class="e-i-title"> <h3> Get %10 off when you sign up for <span>savings, news, updates and more</span> </h3> </div><div class="e-i-form mt-3"> <form id="eiForm"> <div class="e-i-form-field"> <input type="text" class="e-i-form-text-field px-2" placeholder="Your name" id="eIName" name="eIName"/> </div><div class="e-i-form-field"> <input type="text" class="e-i-form-text-field ie-form-element px-2" placeholder="Email address" id="eIEmail" name="eIEmail"/> </div><div class="e-i-form-field flex flex-flow-row align-items-center"> <input type="checkbox" class="e-i-form-checkbox" id="eICheckBox" name="eICheckBox"/> <label>Check this box to recieve monthly newsletter.</label> </div><div class="e-i-form-footer flex flex-flow-column align-items-center" > <input id="eISubmit" type="submit" value="Sign Up" class="button"/> <a href="#" class="eiLink">Privacy Policy</a> </div></form> </div></div><div class="e-i-banner-img p-3 align-items-center"> <img src="https://shariqansari88.github.io/exit-intent-popup/assets/img/christmas-sale-banner.jpg" alt="Christmas Sale 50% Off"/> </div></div></section>`;
 
-      iePop.body.append(template);
+      // iePop.body.append(template);
 
       iePop.popup = $(".exit-intent-popup");
       iePop.form = $("#eiForm");
@@ -49,25 +49,37 @@ $(document).ready(function () {
     handlePopupShow: function () {
       if (iePop.isPopShow === true) {
         iePop.popup.addClass("show");
-        console.log(iePop.popup.length);
+        iePop.body.css({ "overflow-y": "hidden" });
       }
     },
 
     handleMobilePopupShow: function () {
       setTimeout(function () {
         let isCookies = JSON.parse(iePop.cookies.iePop);
-        console.log("Mobile cookie =", isCookies);
 
         if (iePop.isMobile && isCookies !== true) {
           iePop.popup.addClass("show");
+          iePop.body.css({ "overflow-y": "hidden" });
         }
       }, 5000);
     },
 
     handlePopupClose: function () {
       $(".e-i-close-cta").on("click", function () {
-        console.log("clicked");
-        iePop.popup.removeClass("show");
+        iePop.body.css({ "overflow-y": "visible" });
+
+        setTimeout(function () {
+          $(".e-i-opac-layer").addClass("iePopFadeOutOpacLayer");
+          $(".e-i-pop-content").addClass("iePopTranslateYReverse");
+          $(document).on(
+            "animationend",
+            ".iePopTranslateYReverse",
+            function () {
+              iePop.popup.removeClass("show");
+            }
+          );
+        }, 300);
+
         iePop.setCookie("iePop", true, 1);
       });
     },
@@ -95,7 +107,11 @@ $(document).ready(function () {
         iePop.cookies.iePop = false;
       }
 
-      console.log("Cookie =", iePop.cookies.iePop);
+      console.log(
+        iePop.cookies.iePop === false
+          ? 'Cookie "iePop" is not exist - Exit-Intent Popup will appear when you try to close your tab'
+          : 'Cookie "iePop" is exist - You have to delete cookie to appear popup again'
+      );
     },
 
     handleFormValidation: function () {
@@ -136,7 +152,24 @@ $(document).ready(function () {
           check = false;
         } else {
           e.preventDefault();
-          iePop.popup.removeClass("show");
+          iePop.body.css({ "overflow-y": "visible" });
+          $("#eiForm")[0].reset();
+          $(".ie-form-element").removeClass("error");
+          $(".exit-intent-popup input[type='checkbox']").removeClass("error");
+          $(".ie-form-element").after(
+            "<label class='error' style='color:green; display:block; margin:0.5rem 0;font-size:12px;'>Form submitted successfully!</label>"
+          );
+          setTimeout(function () {
+            $(".e-i-opac-layer").addClass("iePopFadeOutOpacLayer");
+            $(".e-i-pop-content").addClass("iePopTranslateYReverse");
+            $(document).on(
+              "animationend",
+              ".iePopTranslateYReverse",
+              function () {
+                iePop.popup.removeClass("show");
+              }
+            );
+          }, 1000);
           iePop.setCookie("iePop", true, 1);
         }
 
@@ -145,7 +178,7 @@ $(document).ready(function () {
     },
 
     init: function () {
-      // iePop.template();
+      iePop.template();
       if (iePop.isMobile) {
         iePop.handleMobilePopupShow();
       } else {
