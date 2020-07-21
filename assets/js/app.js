@@ -143,7 +143,7 @@ $(document).ready(function () {
     },
 
     init: function () {
-      iePop.template();
+      // iePop.template();
       if (iePop.isMobile) {
         iePop.handleMobilePopupShow();
       } else {
